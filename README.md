@@ -1,4 +1,4 @@
-# reveng(1) — User Commands
+# reveng — User Commands
 
 ## Name
 `reveng` - reverse engineering tool for Java class diagrams
