@@ -25,13 +25,11 @@ public class YumlFormat implements OutputFormat{
         StringBuilder sb = new StringBuilder();
         sb.append("[");
 
-        // header
         if (c.isInterface())
             sb.append("<<").append(c.name()).append(">>");
         else
             sb.append(c.name());
 
-        // campuri
         if (!c.fields().isEmpty()) {
             sb.append("|");
             for (FieldInfo f : c.fields())
@@ -39,7 +37,6 @@ public class YumlFormat implements OutputFormat{
                         .append(f.type()).append(" ").append(f.name()).append(";");
         }
 
-        // metode
         if (!c.methods().isEmpty()) {
             sb.append("|");
             for (MethodInfo m : c.methods())
@@ -53,24 +50,20 @@ public class YumlFormat implements OutputFormat{
     }
 
     private void renderRelationships(ClassInfo c, StringBuilder sb) {
-        // extends
         if (c.parent() != null)
             sb.append("[").append(c.parent()).append("]")
                     .append("^")
                     .append("[").append(c.name()).append("]\n");
 
-        // implements
         for (String iface : c.interfaces())
             sb.append("[<<").append(iface).append(">>]")
                     .append("^")
                     .append("[").append(c.name()).append("]\n");
 
-        // association
         for (String assoc : c.associations())
             sb.append("[").append(c.name()).append("]")
                     .append("->[").append(assoc).append("]\n");
 
-        // dependency
         for (String dep : c.dependencies())
             sb.append("[").append(c.name()).append("]")
                     .append("-.->[").append(dep).append("]\n");

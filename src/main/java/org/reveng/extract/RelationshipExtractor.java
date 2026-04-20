@@ -33,9 +33,8 @@ public class RelationshipExtractor {
     private static void addIfValid(Type type, List<String> exclude,
                                    List<String> result, Config config) {
         if (type instanceof ParameterizedType pt) {
-            // intram in generic ex: List<ClassInfo> -> verificam ClassInfo
             for (Type arg : pt.getActualTypeArguments()) {
-                addIfValid(arg, exclude, result, config); // recursiv
+                addIfValid(arg, exclude, result, config);
             }
         } else {
             Class<?> raw = getRawType(type);
